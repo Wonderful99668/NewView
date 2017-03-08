@@ -9,7 +9,7 @@ import android.support.annotation.ColorInt;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.View;
-
+import android.widget.Toast;
 
 
 public class CustomClass extends View{
@@ -47,19 +47,17 @@ public class CustomClass extends View{
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
-        Paint paint=new Paint(Paint.ANTI_ALIAS_FLAG);
-        if (select==2){
+        Paint paint=new Paint(Paint.ANTI_ALIAS_FLAG);//消除锯齿
+        if(select==1){
 
+        }
+
+        if (select==2){
         drawStar(canvas,paint,color,getHeight()/12,textNum,false);
         canvas.translate(getHeight()/6,0);
         drawStar(canvas,paint,color,getHeight()/12,textNum,true);
         canvas.translate(-getHeight()/6,0);
         canvas.translate(0,getHeight()/2);}
-
-        if(select==1){
-
-        }
-
 
     }
 
@@ -67,6 +65,7 @@ public class CustomClass extends View{
     private void drawStar(Canvas canvas,Paint paint,@ColorInt int color,float radius,int count,boolean isStar){
         canvas.translate(radius,radius);
         if((!isStar)&&count<3){
+            Toast.makeText(getContext(),"当前输入错误，输入的边数必须大于等于3",Toast.LENGTH_SHORT).show();//通过getContext()来获取当前对象的上下文
             canvas.translate(-radius,-radius);
             return;
     }
