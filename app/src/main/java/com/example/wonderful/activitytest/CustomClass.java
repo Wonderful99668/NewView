@@ -11,9 +11,6 @@ import android.util.Log;
 import android.view.View;
 
 
-/**
- * Created by wonderful on 2017/3/6.
- */
 
 public class CustomClass extends View{
 
