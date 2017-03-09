@@ -57,7 +57,8 @@ public class CustomClass extends View{
         canvas.translate(getHeight()/6,0);
         drawStar(canvas,paint,color,getHeight()/12,textNum,true);
         canvas.translate(-getHeight()/6,0);
-        canvas.translate(0,getHeight()/2);}
+        canvas.translate(0,getHeight()/2);
+        }
 
     }
 
