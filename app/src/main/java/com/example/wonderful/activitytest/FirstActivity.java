@@ -48,7 +48,7 @@ public class FirstActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.first_layout);
         customClass=(CustomClass) findViewById(R.id.my_view);
-        customClass.initScreenW_H();
+
         Button button1=(Button)findViewById(R.id.sure);
         button1.setOnClickListener(new View.OnClickListener() {
             @Override

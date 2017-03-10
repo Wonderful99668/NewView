@@ -7,7 +7,6 @@ import android.graphics.Paint;
 import android.graphics.Path;
 import android.support.annotation.ColorInt;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Toast;
@@ -15,28 +14,28 @@ import android.view.View.OnTouchListener;
 
 
 public class CustomClass extends View implements OnTouchListener{
+    protected void initScreenW_H() {
+        screenHeight = getResources().getDisplayMetrics().heightPixels - 30;
+        screenWidth = getResources().getDisplayMetrics().widthPixels;
+    }
 
     public CustomClass(Context context, AttributeSet attrs) {
         super(context, attrs);
+        setOnTouchListener(this);
+        initScreenW_H();
     }
 
     public CustomClass(Context context) {
         super(context);
+        setOnTouchListener(this);
+        initScreenW_H();
     }
 
     public CustomClass(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
+        setOnTouchListener(this);
+        initScreenW_H();
     }
-
-    public CustomClass(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
-        super(context, attrs, defStyleAttr, defStyleRes);
-    }
-
-    //重构ondraw函数
-    int textNum=3;  //用来储存多边形的边数
-    int select=0;   //用来控制自定义模式
-    int color=0;
-    FirstActivity activity=new FirstActivity();
 
     public void SetNum(int textNum){
         this.textNum=textNum;
@@ -67,7 +66,11 @@ public class CustomClass extends View implements OnTouchListener{
     private static final int CENTER = 0x19;
     private int offset = 20;
 
-
+    //重构OnDraw函数
+    int textNum=3;  //用来储存多边形的边数
+    int select=0;   //用来控制自定义模式
+    int color=0;
+    
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
@@ -137,19 +140,12 @@ public class CustomClass extends View implements OnTouchListener{
         return (float) Math.cos(num*Math.PI/180);
         }
 
-
     /**
      * 初始化获取屏幕宽高
      */
-    protected void initScreenW_H() {
-        screenHeight = getResources().getDisplayMetrics().heightPixels - 40;
-        screenWidth = getResources().getDisplayMetrics().widthPixels;
-    }
-
-
-
     @Override
     public boolean onTouch(View view, MotionEvent motionEvent) {
+        /*获取屏幕位置以及手指动作*/
         int action = motionEvent.getAction();
         if (action == MotionEvent.ACTION_DOWN) {
             oriLeft = view.getLeft();
@@ -167,10 +163,6 @@ public class CustomClass extends View implements OnTouchListener{
     }
     /**
      * 处理拖动事件
-     *
-     * @param v
-     * @param event
-     * @param action
      */
     protected void delDrag(View v, MotionEvent event, int action) {
         switch (action) {
@@ -336,19 +328,6 @@ public class CustomClass extends View implements OnTouchListener{
         return CENTER;
     }
 
-    /**
-     * 获取截取宽度
-     */
-    public int getCutWidth() {
-        return getWidth() - 2 * offset;
-    }
-
-    /**
-     *获取截取高度
-     */
-    public int getCutHeight() {
-        return getHeight() - 2 * offset;
-    }
 }
 
 
